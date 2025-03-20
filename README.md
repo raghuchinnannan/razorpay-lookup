@@ -4,8 +4,6 @@ A simple tool to help you see your Razorpay Storefront orders properly.
 
 ![](https://pbs.twimg.com/media/GmgB4rdbIAAYQ4V?format=jpg&name=4096x4096)
 
-<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Razorpay Storefront has a weird UX issue that hurts non-technical business owners.<br><br>When they check order details, they just see raw JSON instead of actual details. Emails aren&#39;t helpful either.<br><br>Turns out adding <a href="https://twitter.com/hashtag/storefront?src=hash&amp;ref_src=twsrc%5Etfw">#storefront</a> to the URL fixes it! But who would know that? <a href="https://t.co/Q8q5g00ZUH">pic.twitter.com/Q8q5g00ZUH</a></p>&mdash; Raghu Chinnannan 🇮🇳 (@RaghuChinnannan) <a href="https://twitter.com/RaghuChinnannan/status/1902773029832364396?ref_src=twsrc%5Etfw">March 20, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
 ## What does it solve?
 
 When you use Razorpay Storefront pages to receive orders, you run into two annoying problems:
