@@ -16,9 +16,10 @@ This tool fixes that by simply adding `#storefront` to the URL - which makes Raz
 
 ## How to use it
 
-1. Enter your Order ID (like `order_Q7iGFi26KGX7M7`) or Payment ID (like `pay_Q6iIK4pinZmyXQ`)
-2. Click the button
-3. See your order details in a readable format!
+1. Access the tool: https://razorpay-lookup.pages.dev
+2. Enter your Order ID (like `order_Q7iGFi26KGX7M7`) or Payment ID (like `pay_Q6iIK4pinZmyXQ`)
+3. Click the button
+4. See your order details in a readable format!
 
 ## The honest truth
 
