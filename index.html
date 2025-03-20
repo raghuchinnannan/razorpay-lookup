@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO Meta Tags -->
+    <title>Razorpay Lookup - View Order & Payment Details Properly</title>
+    <meta name="description"
+        content="Easily view Razorpay Storefront order and payment details in a human-readable format. Simply enter your Order ID or Payment ID.">
+    <meta name="keywords"
+        content="razorpay, storefront, order lookup, payment lookup, razorpay dashboard, order details, payment details">
+
+    <!-- Open Graph / Social Media Tags -->
+    <meta property="og:title" content="Razorpay Lookup Tool">
+    <meta property="og:description"
+        content="See your Razorpay Storefront orders and payments in a readable format. No more confusing JSON!">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://razorpay-lookup.yourdomain.com">
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Razorpay Lookup Tool">
+    <meta name="twitter:description"
+        content="View your Razorpay order details in a human-readable format instead of confusing JSON data.">
+
+    <!-- Favicon -->
+    <link rel="icon"
+        href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"> <text y=".9em" font-size="90">🔍</text></svg>'>
+
+    <style>
+        :root {
+            --primary-color: #2273dc;
+            --primary-hover: #1a5fb3;
+            --background-color: #f8f9fa;
+            --card-color: #ffffff;
+            --text-color: #333333;
+            --border-color: #e0e0e0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            padding: 15px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 550px;
+            padding: 25px;
+            background-color: var(--card-color);
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .tagline {
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 1rem;
+            color: #666;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(34, 115, 220, 0.2);
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+
+        button:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .error {
+            color: #e53935;
+            margin-bottom: 15px;
+            display: none;
+            padding: 8px 12px;
+            background-color: rgba(229, 57, 53, 0.1);
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        .info-box {
+            margin-top: 25px;
+            padding: 20px;
+            background-color: #f3f7fc;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .info-title {
+            font-weight: 600;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .info-content {
+            font-size: 0.9rem;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .examples {
+            margin-top: 15px;
+            color: #666;
+            font-size: 0.85rem;
+        }
+
+        .example {
+            font-family: monospace;
+            background-color: #f0f0f0;
+            padding: 2px 6px;
+            border-radius: 3px;
+            margin-left: 5px;
+        }
+
+        footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .links {
+            text-decoration: dotted;
+            color: #2273dc;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Razorpay Lookup</h1>
+        <p class="tagline">View your Razorpay Storefront orders in a human-readable format</p>
+
+        <div id="error-message" class="error"></div>
+
+        <input type="text" id="id-input" placeholder="Enter Order ID or Payment ID" autocomplete="off" autofocus>
+        <button onclick="redirectToRazorpay()">View Details</button>
+
+        <div class="info-box">
+            <h3 class="info-title">What does this tool do?</h3>
+            <p class="info-content">
+                Razorpay Storefront emails don't include detailed information about your order (products, quantities,
+                etc.).
+                This tool helps you access the proper view in the Razorpay dashboard by automatically appending
+                "#storefront"
+                to the URL, showing you human-readable details instead of raw JSON data.
+            </p>
+            <div class="examples">
+                Enter either:
+                <div>Order ID <span class="example">Eg: order_Q7iGFi26KGX7M7</span> or</div><br>
+                <div>Payment ID <span class="example">Eg: pay_Q6iIK4pinZmyXQ</span></div>
+            </div>
+
+        </div>
+
+
+        <footer>
+            <div style="text-align: center;">
+                Learn more on <a class="links" href="https://github.com/raghuchinnannan/razorpay-lookup"
+                    target="_blank">Github</a> | Built by <a class="links" href="https://x.com/RaghuChinnannan"
+                    target="_blank">Raghu Chinnannan</a>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        function redirectToRazorpay() {
+            // Get the input ID
+            const inputId = document.getElementById('id-input').value.trim();
+            const errorElement = document.getElementById('error-message');
+
+            // Basic validation
+            if (!inputId) {
+                errorElement.textContent = "Please enter an Order ID or Payment ID";
+                errorElement.style.display = "block";
+                return;
+            }
+
+            // Check if it's an order ID
+            if (inputId.startsWith('order_')) {
+                if (!/^order_[a-zA-Z0-9]+$/.test(inputId)) {
+                    errorElement.textContent = "Invalid Order ID format";
+                    errorElement.style.display = "block";
+                    return;
+                }
+                // Redirect to order URL
+                window.location.href = `https://dashboard.razorpay.com/app/orders/${inputId}#storefront`;
+            }
+            // Check if it's a payment ID
+            else if (inputId.startsWith('pay_')) {
+                if (!/^pay_[a-zA-Z0-9]+$/.test(inputId)) {
+                    errorElement.textContent = "Invalid Payment ID format";
+                    errorElement.style.display = "block";
+                    return;
+                }
+                // Redirect to payment URL
+                window.location.href = `https://dashboard.razorpay.com/app/payments/${inputId}#storefront`;
+            }
+            // Invalid ID format
+            else {
+                errorElement.textContent = "Invalid ID format. ID should start with 'order_' or 'pay_'";
+                errorElement.style.display = "block";
+            }
+        }
+
+        // Allow Enter key to submit
+        document.getElementById('id-input').addEventListener('keypress', function (event) {
+            if (event.key === 'Enter') {
+                redirectToRazorpay();
+            }
+        });
+
+        // Clear error on input
+        document.getElementById('id-input').addEventListener('input', function () {
+            document.getElementById('error-message').style.display = "none";
+        });
+    </script>
+</body>
+
+</html>
